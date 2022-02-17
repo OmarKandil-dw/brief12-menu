@@ -126,6 +126,7 @@ if(isset($_POST['submit'])) {
         <td>'.$emp['salaire'].'</td>
         <td>'.$emp['fonction'].'</td>
         <td>'.$emp['photo']."</td>
+        
         <td> '<img src=images/" . $value["photo"] . "></td>
         <td> 
          <a href='index.php?rn=".$emp["matricule"]."'>delete</a> 
