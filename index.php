@@ -6,7 +6,6 @@
 body {
   font-family: "Lato", sans-serif;
 }
-
 .sidenav {
   height: 100%;
   width: 160px;
@@ -32,13 +31,17 @@ body {
 }
 
 .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
+  margin-left: 160px; 
+  font-size: 28px; 
   padding: 0px 10px;
 }
 #table{
  position: absolute;
  left: 180px;
+}
+
+td:nth-child(even) {
+  background-color: #dddddd;
 }
 table {
   font-family: arial, sans-serif;
@@ -57,21 +60,24 @@ td, th {
 <body>
 <?php
 
-$id = $_POST["Id"];
-$Nom = $_POST["Nom"];
-$Prénom = $_POST["Prénom"];
-$Date = $_POST["Date"];
-$Départ = $_POST["Départ"];
-$Salaire = $_POST["Salaire"];
-$fonction = $_POST["fonction"];
-$Image = $_POST["Image"];
+include 'connect.php';
 
-$conn = new mysqli('localhost', 'root', '' ,'mydata');
-$sql = "INSERT INTO employe VALUES($id,'$Nom','$Prénom',$Date,'$Départ',$Salaire,'$fonction','$Image')";
-$conn->query($sql);
+if(isset($_POST['submit'])) {
+  $matricule = $_POST['matricule'];
+  $nom = $_POST['nom'];
+  $prenom = $_POST['prenom'];
+  $Date = $_POST['date_naissance'];
+  $departement = $_POST['departement'];
+  $salaire = $_POST['salaire'];
+  $fonction = $_POST['fonction'];
+  $Image = $_POST['photo'];
+  $sql = "INSERT INTO `employe`(`matricule`, `nom`, `prenom`, `date_naissance`, `departement`, `salaire`, `fonction`, `photo`) VALUES ('$matricule','$nom','$prenom','$Date','$departement','$salaire','$fonction','$Image')";
+  mysqli_query($conn,$sql);
+}
 
+
+  
 ?>
-
 <div class="sidenav">
   <a href="#">Lister les employés</a>
   <a href="add.php">Ajouter un nouveau employé</a>
@@ -88,30 +94,48 @@ $conn->query($sql);
     <th>Salaire</th>
     <th>fonction</th>
     <th>Image</th>
+    <th>Edit/Delete</th>
   </tr>
   <tbody>
     <?php
+    
+  if(isset($_GET['rn']))
+  {
+    $matricule=$_GET['rn'];
+    // $matricule =$_GET['matricule'];
+    $query = "DELETE FROM employe WHERE matricule = '$matricule'";
+    $res= mysqli_query($conn,$query);
+    if($res)
+    {
+    }
+    else
+     {echo "Error: ". $sql . "".mysqli_error($conn);}
+    
+  }
+
     $sql2  = " SELECT * FROM employe";
     $result = mysqli_query($conn,$sql2);
     if($result){
       while ($emp = mysqli_fetch_assoc($result)){
-
         echo '<tr>
         <td>'.$emp['matricule'].'</td>
         <td>'.$emp['nom'].'</td>
-        <td>'.$emp['prénom'].'</td>
-        <td>'.$emp['date de naissance'].'</td>
-        <td>'.$emp['département'].'</td>
+        <td>'.$emp['prenom'].'</td>
+        <td>'.$emp['date_naissance'].'</td>
+        <td>'.$emp['departement'].'</td>
         <td>'.$emp['salaire'].'</td>
         <td>'.$emp['fonction'].'</td>
-        <td>'.$emp['photo'].'</td>
-        </tr>';
+        <td>'.$emp['photo']."</td>
+        <td> '<img src=images/" . $value["photo"] . "></td>
+        <td> 
+         <a href='index.php?rn=".$emp["matricule"]."'>delete</a> 
+         <a href='edit.php?matricule=".$emp["matricule"]."'>Edit</a> 
+         </td>
+        </tr>";
       }
     }
 ?>
-  </tbody>
+</tbody>
 </table>
-
-
 </body>
 </html> 

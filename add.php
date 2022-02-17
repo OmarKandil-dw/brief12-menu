@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-input[type=text],input[type=date],input[type=number] ,input[type=url] ,  select, textarea {
+input[type=text],input[type=date],input[type=number] ,input[type=file] ,  select, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -52,7 +52,6 @@ input[type=submit]:hover {
   margin-top: 6px;
 }
 
-/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
@@ -71,7 +70,7 @@ input[type=submit]:hover {
         <label for="fname">Matricule</label>
       </div>
       <div class="col-75">
-        <input type="text" id="fname" name="Id" placeholder="Matricule..">
+        <input type="text" id="fname" name="matricule" placeholder="Matricule..">
       </div>
     </div>
 
@@ -81,7 +80,7 @@ input[type=submit]:hover {
         <label for="fname">Nom</label>
       </div>
       <div class="col-75">
-        <input type="text" id="fname" name="Nom" placeholder="Nom..">
+        <input type="text" id="fname" name="nom" placeholder="Nom..">
       </div>
     </div>
 
@@ -91,7 +90,7 @@ input[type=submit]:hover {
         <label for="lname">Prénom</label>
       </div>
       <div class="col-75">
-        <input type="text" id="lname" name="Prénom" placeholder="Prénom..">
+        <input type="text" id="lname" name="prenom" placeholder="Prénom..">
       </div>
     </div>
 
@@ -100,7 +99,7 @@ input[type=submit]:hover {
         <label for="lname">Date de naissance</label>
       </div>
       <div class="col-75">
-        <input type="date" id="lname" name="Date" placeholder="Date de naissance..">
+        <input type="date" id="lname" name="date_naissance" placeholder="Date de naissance..">
       </div>
     </div>
 
@@ -110,7 +109,7 @@ input[type=submit]:hover {
         <label for="lname">Département</label>
       </div>
       <div class="col-75">
-        <input type="text" id="lname" name="Départ" placeholder="Département..">
+        <input type="text" id="lname" name="departement" placeholder="Département..">
       </div>
     </div>
 
@@ -119,7 +118,7 @@ input[type=submit]:hover {
         <label for="lname">Salaire</label>
       </div>
       <div class="col-75">
-        <input type="number" id="lname" name="Salaire" placeholder="Salaire..">
+        <input type="number" id="lname" name="salaire" placeholder="Salaire..">
       </div>
     </div>
  
@@ -129,9 +128,10 @@ input[type=submit]:hover {
       </div>
       <div class="col-75">
         <select id="fonction" name="fonction">
-          <option value=""></option>
-          <option value=""></option>
-          <option value=""></option>
+          <option value="AP"> AP</option>
+          <option value="RH">RH</option>
+          <option value="MV">MV </option>
+          <option value="RPR">RPR</option>
         </select>
       </div>
     </div>
@@ -142,15 +142,17 @@ input[type=submit]:hover {
         <label for="img">image URL</label>
       </div>
       <div class="col-75">
-      <input type="url" id="lname" name="Image" placeholder="image URL..">  
+      <input type="file" id="lname" name="Image" placeholder="image URL..">  
         </div>
     </div>
     
     <div class="row">
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" name="submit">
     </div>
   </form>
 </div>
+
+<button><a href="./index.php">P.précedent</a> </button>
 
 </body>
 </html>

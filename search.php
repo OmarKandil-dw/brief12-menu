@@ -1,3 +1,7 @@
+
+
+<?php include 'connect.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Document</title>
+    
 </head>
 <style>
 table {
@@ -34,6 +39,8 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
+
+<button><a href="./index.php">P.ACCEUIL</a></button>
 
 <section>
 <form  id="search">
@@ -65,6 +72,26 @@ tr:nth-child(even) {
     <th>Fonction</th>
     <th>image</th>  
   </tr>
+  <?php
+    $sql2  = " SELECT * FROM employe";
+    $result = mysqli_query($conn,$sql2);
+    if($result){
+      while ($emp = mysqli_fetch_assoc($result)){
+
+        echo '<tr>
+
+        <td>'.$emp['matricule'].'</td>
+        <td>'.$emp['nom'].'</td>
+        <td>'.$emp['prenom'].'</td>
+        <td>'.$emp['date_naissance'].'</td>
+        <td>'.$emp['departement'].'</td>
+        <td>'.$emp['salaire'].'</td>
+        <td>'.$emp['fonction'].'</td>
+        <td>'.$emp['photo'].'</td>   
+        </tr>';
+      }
+    }
+?>
 </table>
 </body>
 </html>
