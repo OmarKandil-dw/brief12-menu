@@ -99,7 +99,7 @@ if(isset($_POST['submit'])) {
   if(isset($_GET['rn']))
   {
     $matricule=$_GET['rn'];
-    
+    // $matricule =$_GET['matricule'];
     $query = "DELETE FROM employe WHERE matricule = '$matricule'";
     $res= mysqli_query($conn,$query);
     if($res)
