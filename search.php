@@ -59,8 +59,8 @@ tr:nth-child(even) {
 
 <form  method="POST">
   <div>
-    <input type="text" name="search"
-     placeholder="search by Name"  value="<?php echo $search;?>">
+    <input style="width: 20%; "  type="text" name="search"
+     placeholder="search by matr/name/depar"  value="<?php echo $search;?>">
     <button>search</button>
   </div>
 </form>
