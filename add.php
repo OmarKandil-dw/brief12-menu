@@ -156,3 +156,33 @@ input[type=submit]:hover {
 
 </body>
 </html>
+<?php 
+
+if(isset($_GET['search'])){
+  $filtervalues = $_GET['search'];
+  $sql = "SELECT * FROM employe WHERE CONCAT(matricule,nom,prenom,date_naissance,departement,salaire,fonction) LIKE '%$filtervalues%'";
+  $query_run =   mysqli_query($conn,$sql);
+
+  if(mysqli_num_rows($query_run) > 0 ){
+    foreach($query_run as $items){
+      ?>
+      <tr>
+        <td><?- $items['matricule'];?></td>
+        <td><?- $items['nom'];?></td>
+        <td><?- $items['prenom'];?></td>
+        <td><?- $items['date_naissance'];?></td>
+        <td><?- $items['departement'];?></td>
+        <td><?- $items['salaire'];?></td>
+        <td><?- $items['fonction'];?></td>
+      </tr>
+      <?php 
+
+    }
+
+}
+else{
+echo 'no record found';
+
+} 
+}
+?>

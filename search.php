@@ -41,24 +41,30 @@ tr:nth-child(even) {
 <body>
 
 <button><a href="./index.php">P.ACCEUIL</a></button>
+<?php 
 
+  if(isset($_POST['search'])){
+    $search = $_POST['search'];
+    
+    $sql = "SELECT * FROM employe WHERE nom LIKE '%$search%' OR matricule LIKE '%$search%'   OR departement LIKE '%$search%'";
+  } 
+  else{
+    $sql="SELECT * FROM employe";
+    $search ="";
+  }
+  $result = mysqli_query($conn,$sql);
+
+?>
 <section>
-<form  id="search">
-<form action="index.php" method="POST">
+
+<form  method="POST">
   <div>
-    <input type="search" id="maRecherche" name="q" placeholder="search by Name">
-    <button>search</button>
-  </div>
-  <div>
-    <input type="search" id="maRecherche" name="q" placeholder="search by Matricule">
-    <button>search</button>
-  </div>
-  <div>
-    <input type="search" id="maRecherche" name="q" placeholder="search by Fonction">
+    <input type="text" name="search"
+     placeholder="search by Name"  value="<?php echo $search;?>">
     <button>search</button>
   </div>
 </form>
-</form>
+
 
 </section>
 <table>
@@ -69,29 +75,25 @@ tr:nth-child(even) {
     <th>Date de naissance</th>
     <th>Département</th>
     <th>Salaire</th>
-    <th>Fonction</th>
-    <th>image</th>  
+    <th>Fonction</th> 
   </tr>
-  <?php
-    $sql2  = " SELECT * FROM employe";
-    $result = mysqli_query($conn,$sql2);
-    if($result){
-      while ($emp = mysqli_fetch_assoc($result)){
+  <tbody>
+  
+    <?php  
+     if($result){
+      foreach($result as $row){
+      echo '<tr>
+      <td>'.$row['matricule'].'</td>
+        <td> '.$row['nom']. '</td>
+        <td>'.$row['prenom'].'</td>
+        
+        <td>'.$row['date_naissance'].'</td>
+        <td>'.$row['departement'].'</td>
+        <td>'.$row['salaire'].'</td>
+        <td>'.$row['fonction'].'</td>
+      </tr>';
 
-        echo '<tr>
-
-        <td>'.$emp['matricule'].'</td>
-        <td>'.$emp['nom'].'</td>
-        <td>'.$emp['prenom'].'</td>
-        <td>'.$emp['date_naissance'].'</td>
-        <td>'.$emp['departement'].'</td>
-        <td>'.$emp['salaire'].'</td>
-        <td>'.$emp['fonction'].'</td>
-        <td>'.$emp['photo'].'</td>   
-        </tr>';
-      }
-    }
-?>
+  }}?> </tbody>
 </table>
 </body>
 </html>

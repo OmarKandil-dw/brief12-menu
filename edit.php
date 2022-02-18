@@ -19,28 +19,28 @@
         $row = $get_data->fetch_array(MYSQLI_ASSOC);
     }
     if(isset($_POST['edit_btn'])){
-        // $photo_backup = $_REQUEST["photo"];
-        // $photo = "";
+        $photo_backup = $_REQUEST["photo"];
+        $photo = "";
         $nom = $_POST["nom"];
         $prenom = $_POST["prenom"];
         $date = $_POST["date_naissance"];
         $departement = $_POST["departement"];
         $salaire = $_POST["salaire"];
         $fonction = $_POST["fonction"];
-        // $img = $_FILES["image"];
-        // $filename = $img["name"];
-        // $tempfile = $img["tmp_name"];
-        // if($filename==""){
-        //     $photo = $photo_backup;
-        // }
-        // else{
-        //     $photo = $filename;
-        // }
+        $img = $_FILES["image"];
+        $filename = $img["name"];
+        $tempfile = $img["tmp_name"];
+        if($filename==""){
+            $photo = $photo_backup;
+        }
+        else{
+            $photo = $filename;
+        }
         $sql = "UPDATE employe SET nom = '$nom', prenom = '$prenom', date_naissance = '$date',
             departement = '$departement', salaire = $salaire, fonction = '$fonction '
             WHERE matricule = '$matricule';
         ";
-        // move_uploaded_file($tempfile, "images/$filename");
+        move_uploaded_file($tempfile, "images/$filename");
         $conn->query($sql);
         header("location: index.php");
     }
@@ -51,7 +51,12 @@
         <input value="<?php echo $row["date_naissance"]?>" type="date" name="date_naissance">
         <input value="<?php echo $row["departement"]?>" type="text" name="departement" placeholder="departement">
         <input value="<?php echo $row["salaire"]?>" type="text" name="salaire" placeholder="salaire">
-        <input value="<?php echo $row["fonction"]?>" type="text" name="fonction" placeholder="fonction">
+        <select value="<?php echo $row["fonction"]?> id="fonction" name="fonction" placeholder="fonction">
+          <option value="AP"> AP</option>
+          <option value="RH">RH</option>
+          <option value="MV">MV </option>
+          <option value="RPR">RPR</option>
+        </select>
         
         <input type="submit" name="edit_btn">
     </form>

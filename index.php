@@ -75,8 +75,6 @@ if(isset($_POST['submit'])) {
   mysqli_query($conn,$sql);
 }
 
-
-  
 ?>
 <div class="sidenav">
   <a href="#">Lister les employés</a>
@@ -98,11 +96,10 @@ if(isset($_POST['submit'])) {
   </tr>
   <tbody>
     <?php
-    
   if(isset($_GET['rn']))
   {
     $matricule=$_GET['rn'];
-    // $matricule =$_GET['matricule'];
+    
     $query = "DELETE FROM employe WHERE matricule = '$matricule'";
     $res= mysqli_query($conn,$query);
     if($res)
@@ -126,8 +123,6 @@ if(isset($_POST['submit'])) {
         <td>'.$emp['salaire'].'</td>
         <td>'.$emp['fonction'].'</td>
         <td>'.$emp['photo']."</td>
-        
-        <td> '<img src=images/" . $value["photo"] . "></td>
         <td> 
          <a href='index.php?rn=".$emp["matricule"]."'>delete</a> 
          <a href='edit.php?matricule=".$emp["matricule"]."'>Edit</a> 
